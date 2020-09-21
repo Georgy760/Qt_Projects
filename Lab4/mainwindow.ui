@@ -485,6 +485,9 @@
       <height>41</height>
      </rect>
     </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
     <item>
      <property name="text">
       <string>∧</string>
@@ -536,22 +539,6 @@
      </property>
     </item>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>799</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuLog">
-    <property name="title">
-     <string>Log</string>
-    </property>
-   </widget>
-   <addaction name="menuLog"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
