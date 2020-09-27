@@ -57,7 +57,7 @@ void MainWindow::on_comboBox_LOG_currentIndexChanged(int index)
         break;
 
     case 5: ui->comboBox_OP2->setVisible(1);
-        if ((ui->comboBox_LOG->currentIndex() == 5) && ((ui->comboBox_OP1->currentIndex() == 1) || ((ui->comboBox_OP2->currentIndex() == 1))) ){ // 0 || 0 = 0, 1 || 0 = 1, 0 || 1 = 1, 1 == 1 = 0
+        if ((ui->comboBox_LOG->currentIndex() == 5) && ((ui->comboBox_OP1->currentIndex() == 1) || ((ui->comboBox_OP2->currentIndex() == 1))) ){ // 0 || 0 = 0, 1 || 0 = 1, 0 || 1 = 1, 1 || 1 = 0
             pal.setColor(QPalette::Window,Qt::green); //green
         } if ((ui->comboBox_OP1->currentIndex() == ui->comboBox_OP2->currentIndex())) pal.setColor(QPalette::Window,Qt::red); //red
         break;
@@ -74,33 +74,83 @@ void MainWindow::on_comboBox_OP1_currentIndexChanged(int index)
     switch (index)
     {
     case 0:
-        if (ui->comboBox_LOG->currentIndex() == 0 && ui->comboBox_OP2->currentIndex() == 0){
+        if ((ui->comboBox_LOG->currentIndex() == 0) && (ui->comboBox_OP2->currentIndex() == 0)){
             pal.setColor(QPalette::Window,Qt::red); //red
         }
-        if (ui->comboBox_LOG->currentIndex() == 0 && ui->comboBox_OP2->currentIndex() == 1){
+        if ((ui->comboBox_LOG->currentIndex() == 0) && (ui->comboBox_OP2->currentIndex() == 1)){
             pal.setColor(QPalette::Window,Qt::red); //red
         }
 
-        if (ui->comboBox_LOG->currentIndex() == 0 && ui->comboBox_OP2->currentIndex() == 1){
+        if ((ui->comboBox_LOG->currentIndex() == 1) && (ui->comboBox_OP2->currentIndex() == 0)){
+            pal.setColor(QPalette::Window,Qt::red); //red
+        }
+        if ((ui->comboBox_LOG->currentIndex() == 1) && (ui->comboBox_OP2->currentIndex() == 1)){
             pal.setColor(QPalette::Window,Qt::green); //green
         }
-        if (ui->comboBox_LOG->currentIndex() == 0 && ui->comboBox_OP2->currentIndex() == 0){
+
+        if (ui->comboBox_LOG->currentIndex() == 2){
+            pal.setColor(QPalette::Window,Qt::green); //green
+        }
+
+        if ((ui->comboBox_LOG->currentIndex() == 3) && (ui->comboBox_OP2->currentIndex() == 0)){
+            pal.setColor(QPalette::Window,Qt::green); //green
+        }
+        if ((ui->comboBox_LOG->currentIndex() == 3) && (ui->comboBox_OP2->currentIndex() == 1)){
+            pal.setColor(QPalette::Window,Qt::green); //green
+        }
+
+        if ((ui->comboBox_LOG->currentIndex() == 4) && (ui->comboBox_OP2->currentIndex() == 0)){
+            pal.setColor(QPalette::Window,Qt::green); //green
+        }
+        if ((ui->comboBox_LOG->currentIndex() == 4) && (ui->comboBox_OP2->currentIndex() == 1)){
             pal.setColor(QPalette::Window,Qt::red); //red
+        }
+
+        if ((ui->comboBox_LOG->currentIndex() == 5) && (ui->comboBox_OP2->currentIndex() == 0)){
+            pal.setColor(QPalette::Window,Qt::red); //red
+        }
+        if ((ui->comboBox_LOG->currentIndex() == 5) && (ui->comboBox_OP2->currentIndex() == 1)){
+            pal.setColor(QPalette::Window,Qt::green); //green
         }
         break;
     case 1:
-        if (ui->comboBox_LOG->currentIndex() == 0 && ui->comboBox_OP2->currentIndex() == 0){
+        if ((ui->comboBox_LOG->currentIndex() == 0) && (ui->comboBox_OP2->currentIndex() == 0)){
             pal.setColor(QPalette::Window,Qt::red); //red
         }
-        if (ui->comboBox_LOG->currentIndex() == 0 && ui->comboBox_OP2->currentIndex() == 1){
+        if ((ui->comboBox_LOG->currentIndex() == 0) && (ui->comboBox_OP2->currentIndex() == 1)){
             pal.setColor(QPalette::Window,Qt::green); //green
         }
 
-        if (ui->comboBox_LOG->currentIndex() == 0 && ui->comboBox_OP2->currentIndex() == 0){
+        if ((ui->comboBox_LOG->currentIndex() == 1) && (ui->comboBox_OP2->currentIndex() == 0)){
             pal.setColor(QPalette::Window,Qt::green); //green
         }
-        if (ui->comboBox_LOG->currentIndex() == 0 && ui->comboBox_OP2->currentIndex() == 1){
+        if ((ui->comboBox_LOG->currentIndex() == 1) && (ui->comboBox_OP2->currentIndex() == 1)){
             pal.setColor(QPalette::Window,Qt::green); //green
+        }
+
+        if (ui->comboBox_LOG->currentIndex() == 2){
+            pal.setColor(QPalette::Window,Qt::red); //red
+        }
+
+        if ((ui->comboBox_LOG->currentIndex() == 3) && (ui->comboBox_OP2->currentIndex() == 0)){
+            pal.setColor(QPalette::Window,Qt::red); //red
+        }
+        if ((ui->comboBox_LOG->currentIndex() == 3) && (ui->comboBox_OP2->currentIndex() == 1)){
+            pal.setColor(QPalette::Window,Qt::green); //green
+        }
+
+        if ((ui->comboBox_LOG->currentIndex() == 4) && (ui->comboBox_OP2->currentIndex() == 0)){
+            pal.setColor(QPalette::Window,Qt::red); //red
+        }
+        if ((ui->comboBox_LOG->currentIndex() == 4) && (ui->comboBox_OP2->currentIndex() == 1)){
+            pal.setColor(QPalette::Window,Qt::green); //green
+        }
+
+        if ((ui->comboBox_LOG->currentIndex() == 5) && (ui->comboBox_OP2->currentIndex() == 0)){
+            pal.setColor(QPalette::Window,Qt::green); //green
+        }
+        if ((ui->comboBox_LOG->currentIndex() == 5) && (ui->comboBox_OP2->currentIndex() == 1)){
+            pal.setColor(QPalette::Window,Qt::red); //red
         }
         break;
     }
@@ -117,32 +167,74 @@ void MainWindow::on_comboBox_OP2_currentIndexChanged(int index)
     switch (index)
     {
     case 0:
-        if (ui->comboBox_LOG->currentIndex() == 0 && ui->comboBox_OP1->currentIndex() == 0){
+        if ((ui->comboBox_LOG->currentIndex() == 0) && (ui->comboBox_OP1->currentIndex() == 0)){
             pal.setColor(QPalette::Window,Qt::red); //red
         }
-        if (ui->comboBox_LOG->currentIndex() == 0 && ui->comboBox_OP1->currentIndex() == 1){
+        if ((ui->comboBox_LOG->currentIndex() == 0) && (ui->comboBox_OP1->currentIndex() == 1)){
             pal.setColor(QPalette::Window,Qt::red); //red
         }
 
-        if (ui->comboBox_LOG->currentIndex() == 0 && ui->comboBox_OP2->currentIndex() == 1){
+        if ((ui->comboBox_LOG->currentIndex() == 1) && (ui->comboBox_OP1->currentIndex() == 0)){
+            pal.setColor(QPalette::Window,Qt::red); //red
+        }
+        if ((ui->comboBox_LOG->currentIndex() == 1) && (ui->comboBox_OP1->currentIndex() == 1)){
             pal.setColor(QPalette::Window,Qt::green); //green
         }
-        if (ui->comboBox_LOG->currentIndex() == 0 && ui->comboBox_OP2->currentIndex() == 0){
+
+        if ((ui->comboBox_LOG->currentIndex() == 3) && (ui->comboBox_OP1->currentIndex() == 0)){
+            pal.setColor(QPalette::Window,Qt::green); //green
+        }
+        if ((ui->comboBox_LOG->currentIndex() == 3) && (ui->comboBox_OP1->currentIndex() == 1)){
             pal.setColor(QPalette::Window,Qt::red); //red
+        }
+
+        if ((ui->comboBox_LOG->currentIndex() == 4) && (ui->comboBox_OP1->currentIndex() == 0)){
+            pal.setColor(QPalette::Window,Qt::green); //green
+        }
+        if ((ui->comboBox_LOG->currentIndex() == 4) && (ui->comboBox_OP1->currentIndex() == 1)){
+            pal.setColor(QPalette::Window,Qt::red); //red
+        }
+
+        if ((ui->comboBox_LOG->currentIndex() == 5) && (ui->comboBox_OP1->currentIndex() == 0)){
+            pal.setColor(QPalette::Window,Qt::red); //red
+        }
+        if ((ui->comboBox_LOG->currentIndex() == 5) && (ui->comboBox_OP1->currentIndex() == 1)){
+            pal.setColor(QPalette::Window,Qt::green); //green
         }
         break;
     case 1:
-        if (ui->comboBox_LOG->currentIndex() == 0 && ui->comboBox_OP1->currentIndex() == 0){
+        if ((ui->comboBox_LOG->currentIndex() == 0) && (ui->comboBox_OP1->currentIndex() == 0)){
             pal.setColor(QPalette::Window,Qt::red); //red
         }
-        if (ui->comboBox_LOG->currentIndex() == 0 && ui->comboBox_OP1->currentIndex() == 1){
+        if ((ui->comboBox_LOG->currentIndex() == 0) && (ui->comboBox_OP1->currentIndex() == 1)){
             pal.setColor(QPalette::Window,Qt::green); //green
         }
 
-        if (ui->comboBox_LOG->currentIndex() == 0 && ui->comboBox_OP2->currentIndex() == 0){
+        if ((ui->comboBox_LOG->currentIndex() == 1) && (ui->comboBox_OP1->currentIndex() == 0)){
             pal.setColor(QPalette::Window,Qt::green); //green
         }
-        if (ui->comboBox_LOG->currentIndex() == 0 && ui->comboBox_OP2->currentIndex() == 1){
+        if ((ui->comboBox_LOG->currentIndex() == 1) && (ui->comboBox_OP1->currentIndex() == 1)){
+            pal.setColor(QPalette::Window,Qt::green); //green
+        }
+
+        if ((ui->comboBox_LOG->currentIndex() == 3) && (ui->comboBox_OP1->currentIndex() == 0)){
+            pal.setColor(QPalette::Window,Qt::green); //green
+        }
+        if ((ui->comboBox_LOG->currentIndex() == 3) && (ui->comboBox_OP1->currentIndex() == 1)){
+            pal.setColor(QPalette::Window,Qt::green); //green
+        }
+
+        if ((ui->comboBox_LOG->currentIndex() == 4) && (ui->comboBox_OP1->currentIndex() == 0)){
+            pal.setColor(QPalette::Window,Qt::red); //red
+        }
+        if ((ui->comboBox_LOG->currentIndex() == 4) && (ui->comboBox_OP1->currentIndex() == 1)){
+            pal.setColor(QPalette::Window,Qt::green); //green
+        }
+
+        if ((ui->comboBox_LOG->currentIndex() == 5) && (ui->comboBox_OP1->currentIndex() == 0)){
+            pal.setColor(QPalette::Window,Qt::green); //green
+        }
+        if ((ui->comboBox_LOG->currentIndex() == 5) && (ui->comboBox_OP1->currentIndex() == 1)){
             pal.setColor(QPalette::Window,Qt::red); //red
         }
         break;
