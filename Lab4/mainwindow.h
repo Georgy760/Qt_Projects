@@ -10,7 +10,7 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
+//Kolokutin Georgy G "Georgy760"
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
