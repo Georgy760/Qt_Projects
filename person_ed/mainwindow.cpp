@@ -203,12 +203,12 @@ void MainWindow::on_pushButton_rand_clicked()
         flag = rand() % 2;
         if (flag == 0) {
             ui->radioButton_Sex_M->click();
-            ui->radioButton_Sex_W->setAutoExclusive(true);
+            //ui->radioButton_Sex_W->setAutoExclusive(true);
             ui->radioButton_Sex_W->setChecked(false);
         }
         else {
             ui->radioButton_Sex_W->click();
-            ui->radioButton_Sex_M->setAutoExclusive(true);
+            //ui->radioButton_Sex_M->setAutoExclusive(true);
             ui->radioButton_Sex_M->setChecked(false);
         }
     }
@@ -314,15 +314,15 @@ void MainWindow::class_person(int hp,int mp, int atk,int def) // class_person(hp
     {
         if (hp >= 50 && mp >= 50)
         {
-            ui->label_class_value->setText("Паладиша");
+            ui->label_class_value->setText("Паладин");
         }
         if (hp >= 50 && def > atk )
         {
-            ui->label_class_value->setText("Воительница");
+            ui->label_class_value->setText("Воин");
         }
         if (mp >= 50 && atk > def)
         {
-            ui->label_class_value->setText("Колдунья");
+            ui->label_class_value->setText("Маг");
         }
         if (mp >= 50 && def > atk)
         {
