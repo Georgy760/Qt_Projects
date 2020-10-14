@@ -41,6 +41,12 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="inputMask">
+     <string/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
    </widget>
    <widget class="QLabel" name="label_Sex">
     <property name="geometry">
@@ -401,7 +407,7 @@
      <x>0</x>
      <y>0</y>
      <width>1100</width>
-     <height>41</height>
+     <height>34</height>
     </rect>
    </property>
   </widget>

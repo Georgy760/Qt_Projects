@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->pushButton_clear->click();// очищает значения
     ui->lineEdit_Points->setReadOnly(true);//запрещает менять текст
+    ui->radioButton_Sex_M->click();
 }
 
 MainWindow::~MainWindow()
@@ -30,10 +31,10 @@ void MainWindow::on_pushButton_clear_clicked()
         ui->lineEdit_int->setText("0");
         ui->lineEdit_luck->setText("0");
         ui->lineEdit_str->setText("0");
-        ui->radioButton_Sex_M->setAutoExclusive(false);
+        /*ui->radioButton_Sex_M->setAutoExclusive(false);
         ui->radioButton_Sex_M->setChecked(false);
         ui->radioButton_Sex_W->setAutoExclusive(false);
-        ui->radioButton_Sex_W->setChecked(false);
+        ui->radioButton_Sex_W->setChecked(false);*/
 
     }
     ui->lineEdit_str->setVisible(true);
@@ -194,15 +195,35 @@ void MainWindow::on_pushButton_rand_clicked()
 
     name.clear();
 
+    ui->radioButton_Sex_M->setChecked(false);
+    ui->radioButton_Sex_W->setChecked(false);
+
+    if (!random)
+    {
+        flag = rand() % 2;
+        if (flag == 0) {
+            ui->radioButton_Sex_M->click();
+            ui->radioButton_Sex_W->setAutoExclusive(true);
+            ui->radioButton_Sex_W->setChecked(false);
+        }
+        else {
+            ui->radioButton_Sex_W->click();
+            ui->radioButton_Sex_M->setAutoExclusive(true);
+            ui->radioButton_Sex_M->setChecked(false);
+        }
+    }
+
     QString male_names[10] = {"Угоу","Талваноп","Баглис","Могтулад","Иманил","Лионнеш","Елмон","Сулмутт","Мериаль","Стетьилс"};
     QString female_names[10] = {"Китамура","Нисида","Харука","Нисимура","Каору","Мацумото","Хаякава","Чиеко","Кикути","Киносита"};
     if (ui->radioButton_Sex_M->isChecked()){
-        name = male_names[rand()% 9];
+        ui->lineEdit_Name->setText(name = male_names[rand()% 9]);
+        ui->lineEdit_Name->text();
     }
-    if (ui->radioButton_Sex_W->isChecked()){
-        name = female_names[rand()% 9];
-
-}
+    else// (ui->radioButton_Sex_W->isChecked()){
+    {
+        ui->lineEdit_Name->setText(name = female_names[rand()% 9]);
+        ui->lineEdit_Name->text();
+    }
 
 
 
@@ -236,17 +257,7 @@ void MainWindow::on_pushButton_rand_clicked()
         }
 
 
-        ui->radioButton_Sex_M->setChecked(false);
-        ui->radioButton_Sex_W->setChecked(false);
 
-        if (random)
-        {
-            flag = rand() % 2;
-            if (flag == 0)
-                ui->radioButton_Sex_M->click();
-            else
-                ui->radioButton_Sex_W->click();
-        }
 
         if (random)// вывод результата
         {
@@ -276,7 +287,7 @@ void MainWindow::on_pushButton_rand_clicked()
 
 void MainWindow::class_person(int hp,int mp, int atk,int def) // class_person(hp,mp,atk,def);
 {
-    if (ui->radioButton_Sex_M->isChecked())
+    if (ui->radioButton_Sex_M->isChecked()) //|| ui->radioButton_Sex_M->isChecked())
     {
         if (hp >= 50 && mp >= 50)
         {
@@ -288,7 +299,7 @@ void MainWindow::class_person(int hp,int mp, int atk,int def) // class_person(hp
         }
         if (mp >= 50 && atk > def)
         {
-            ui->label_class_value->setText("Колдун");
+            ui->label_class_value->setText("Маг");
         }
         if (mp >= 50 && def > atk)
         {
@@ -299,7 +310,7 @@ void MainWindow::class_person(int hp,int mp, int atk,int def) // class_person(hp
             ui->label_class_value->setText("Разбойник");
         }
     }
-    else
+    if (ui->radioButton_Sex_W->isChecked())
     {
         if (hp >= 50 && mp >= 50)
         {
