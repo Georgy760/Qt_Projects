@@ -17,6 +17,8 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void calc_and_color_points(void);
+
 private slots:
     void on_pushButton_clear_clicked();
 
@@ -24,10 +26,21 @@ private slots:
 
     void on_pushButton_rand_clicked();
 
+    void on_lineEdit_Name_textChanged(const QString &arg1);
+
+    void on_lineEdit_luck_textChanged(const QString &arg1);
+
+    void on_lineEdit_str_textChanged(const QString &arg1);
+
+    void on_lineEdit_dex_textChanged(const QString &arg1);
+
+    void on_lineEdit_int_textChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     int points;// для максимума очков
     void class_person(int,int,int,int);
+    bool sex;
 };
 
 #endif // MAINWINDOW_H

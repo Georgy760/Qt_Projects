@@ -9,6 +9,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pushButton_clear->click();// очищает значения
     ui->lineEdit_Points->setReadOnly(true);//запрещает менять текст
     ui->radioButton_Sex_M->click();
+    ui->lineEdit_Name->setMaxLength(20);
+    ui->lineEdit_str->setMaxLength(2);
+    ui->lineEdit_int->setMaxLength(2);
 }
 
 MainWindow::~MainWindow()
@@ -35,6 +38,7 @@ void MainWindow::on_pushButton_clear_clicked()
         ui->radioButton_Sex_M->setChecked(false);
         ui->radioButton_Sex_W->setAutoExclusive(false);
         ui->radioButton_Sex_W->setChecked(false);*/
+        calc_and_color_points();
 
     }
     ui->lineEdit_str->setVisible(true);
@@ -184,6 +188,7 @@ void MainWindow::on_pushButton_create_clicked()
 
 void MainWindow::on_pushButton_rand_clicked()
 {
+    ui->label_class_value->clear();
     QString name;//имя
     int leng;//длина имени
     bool flag, random;
@@ -204,12 +209,14 @@ void MainWindow::on_pushButton_rand_clicked()
         if (flag == 0) {
             ui->radioButton_Sex_M->click();
             //ui->radioButton_Sex_W->setAutoExclusive(true);
-            ui->radioButton_Sex_W->setChecked(false);
+            ui->radioButton_Sex_M->setChecked(true);
+            sex=true;
         }
         else {
             ui->radioButton_Sex_W->click();
             //ui->radioButton_Sex_M->setAutoExclusive(true);
-            ui->radioButton_Sex_M->setChecked(false);
+            ui->radioButton_Sex_W->setChecked(true);
+            sex=false;
         }
     }
 
@@ -285,52 +292,149 @@ void MainWindow::on_pushButton_rand_clicked()
     }
 }
 
-void MainWindow::class_person(int hp,int mp, int atk,int def) // class_person(hp,mp,atk,def);
+void MainWindow::class_person(int str,int dex, int intel,int luck) // class_person(hp,mp,atk,def);
 {
-    if (ui->radioButton_Sex_M->isChecked()) //|| ui->radioButton_Sex_M->isChecked())
+
+    ui->label_class_value->setText("!!!!!!!!!!!!!!");
+//    if (ui->radioButton_Sex_M->isChecked()) //|| ui->radioButton_Sex_M->isChecked())
+        if (sex)
     {
-        if (hp >= 50 && mp >= 50)
+        if (str >= 5 && intel >= 5)
         {
             ui->label_class_value->setText("Паладин");
         }
-        if (hp >= 50 && def > atk )
+        if (str >= 5 && luck >= dex )
         {
             ui->label_class_value->setText("Воин");
         }
-        if (mp >= 50 && atk > def)
+        if (intel >= 5 && luck >= str)
         {
             ui->label_class_value->setText("Маг");
         }
-        if (mp >= 50 && def > atk)
+        if (intel >= 5 && dex >= str)
         {
             ui->label_class_value->setText("Жрец");
         }
-        if (hp >= 50 && atk > def)
+        if (luck >= 5 && dex >= str)
         {
             ui->label_class_value->setText("Разбойник");
         }
     }
-    if (ui->radioButton_Sex_W->isChecked())
+    else
+    //if (ui->radioButton_Sex_W->isChecked())
     {
-        if (hp >= 50 && mp >= 50)
+        if (str >= 5 && intel >= 5)
         {
-            ui->label_class_value->setText("Паладин");
+            ui->label_class_value->setText("Паладинша");
         }
-        if (hp >= 50 && def > atk )
+        if (str >= 5 && luck >= dex )
         {
-            ui->label_class_value->setText("Воин");
+            ui->label_class_value->setText("Воительница");
         }
-        if (mp >= 50 && atk > def)
+        if (intel >= 5 && luck >= str)
         {
-            ui->label_class_value->setText("Маг");
+            ui->label_class_value->setText("Волшебница");
         }
-        if (mp >= 50 && def > atk)
+        if (intel >= 5 && dex >= str)
         {
             ui->label_class_value->setText("Жрица");
         }
-        if (hp >= 50 && atk > def)
+        if (luck >= 5 && dex >= str)
         {
             ui->label_class_value->setText("Разбойница");
         }
     }
+}
+
+void MainWindow::on_lineEdit_Name_textChanged(const QString &arg1)
+{
+    QString str = arg1;
+    str=str.remove(" "); //убираем пробелы
+    int dlina_str=arg1.length();
+    QPalette pal=ui->lineEdit_Name->palette();
+    if(dlina_str<3){ //проверка длины
+        pal.setColor(QPalette::Text,Qt::red);
+    } else {
+        pal.setColor(QPalette::Text,Qt::green);
+    }
+    ui->lineEdit_Name->setPalette(pal);
+    ui->lineEdit_Name->setText(str);
+}
+
+void MainWindow::on_lineEdit_luck_textChanged(const QString &arg1) //проверка силы
+{
+    bool flag;
+    int value=arg1.toInt(&flag);
+    QPalette pal=ui->lineEdit_luck->palette();
+    if (flag&(value<11)&&(value>0))
+    {
+        pal.setColor(QPalette::Text,Qt::green);
+    } else {
+
+        pal.setColor(QPalette::Text,Qt::red);
+    }
+    ui->lineEdit_luck->setPalette(pal);
+    calc_and_color_points();
+}
+
+void MainWindow::calc_and_color_points(){ //расчет и расскарска остатка очков
+    int ostatok;
+    ostatok=points-ui->lineEdit_str->text().toInt()-ui->lineEdit_dex->text().toInt()-ui->lineEdit_int->text().toInt()-ui->lineEdit_luck->text().toInt();
+    QPalette pal=ui->lineEdit_Points->palette();
+    if(ostatok==0)
+    {
+        pal.setColor(QPalette::Text,Qt::green);
+    } else {
+        pal.setColor(QPalette::Text,Qt::red);
+    }
+    ui->lineEdit_Points->setPalette(pal);
+    ui->lineEdit_Points->setText(QString::number(ostatok));
+}
+
+void MainWindow::on_lineEdit_str_textChanged(const QString &arg1)
+{
+    bool flag;
+    int value=arg1.toInt(&flag);
+    QPalette pal=ui->lineEdit_str->palette();
+    if (flag&(value<11)&&(value>0))
+    {
+        pal.setColor(QPalette::Text,Qt::green);
+    } else {
+
+        pal.setColor(QPalette::Text,Qt::red);
+    }
+    ui->lineEdit_str->setPalette(pal);
+    calc_and_color_points();
+}
+
+void MainWindow::on_lineEdit_dex_textChanged(const QString &arg1)
+{
+    bool flag;
+    int value=arg1.toInt(&flag);
+    QPalette pal=ui->lineEdit_dex->palette();
+    if (flag&(value<11)&&(value>0))
+    {
+        pal.setColor(QPalette::Text,Qt::green);
+    } else {
+
+        pal.setColor(QPalette::Text,Qt::red);
+    }
+    ui->lineEdit_dex->setPalette(pal);
+    calc_and_color_points();
+}
+
+void MainWindow::on_lineEdit_int_textChanged(const QString &arg1)
+{
+    bool flag;
+    int value=arg1.toInt(&flag);
+    QPalette pal=ui->lineEdit_int->palette();
+    if (flag&(value<11)&&(value>0))
+    {
+        pal.setColor(QPalette::Text,Qt::green);
+    } else {
+
+        pal.setColor(QPalette::Text,Qt::red);
+    }
+    ui->lineEdit_int->setPalette(pal);
+    calc_and_color_points();
 }
