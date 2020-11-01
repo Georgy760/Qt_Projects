@@ -21,8 +21,8 @@
   <widget class="QTableWidget" name="tableWidget">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>90</y>
+     <x>10</x>
+     <y>80</y>
      <width>621</width>
      <height>411</height>
     </rect>
@@ -54,7 +54,7 @@
     <string>Вводите координаты точек. Точки даны по обходу многоугольника</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>680</x>
@@ -80,7 +80,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>670</x>
