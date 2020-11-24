@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    my_func();
+    on_comboBox_LogOp_currentIndexChanged(0);
 }
 
 MainWindow::~MainWindow()
@@ -16,138 +16,75 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_comboBox_LogOp_currentIndexChanged(int ) // Выбор операции
 {
-
-    switch (ui->comboBox_LogOp->currentIndex())
-    {
-    case 0: // and
-        MainWindow::on_comboBox_OP1_currentIndexChanged( ui->comboBox_OP1->currentIndex());
-        MainWindow::on_comboBox_OP2_currentIndexChanged( ui->comboBox_OP2->currentIndex());// вызов значений с кнопок
-        break;
-    case 1: //or
-        MainWindow::on_comboBox_OP1_currentIndexChanged( ui->comboBox_OP1->currentIndex());
-        MainWindow::on_comboBox_OP2_currentIndexChanged( ui->comboBox_OP2->currentIndex());// вызов значений с кнопок
-        break;
-    case 2: //!
-        MainWindow::on_comboBox_OP1_currentIndexChanged( ui->comboBox_OP1->currentIndex());
-        MainWindow::on_comboBox_OP2_currentIndexChanged( ui->comboBox_OP2->currentIndex());// вызов значений с кнопок
-        break;
-    case 3: //!or
-        MainWindow::on_comboBox_OP1_currentIndexChanged( ui->comboBox_OP1->currentIndex());
-        MainWindow::on_comboBox_OP2_currentIndexChanged( ui->comboBox_OP2->currentIndex());// вызов значений с кнопок
-        break;
-    case 4: // ->
-        MainWindow::on_comboBox_OP1_currentIndexChanged( ui->comboBox_OP1->currentIndex());
-        MainWindow::on_comboBox_OP2_currentIndexChanged( ui->comboBox_OP2->currentIndex());// вызов значений с кнопок
-        break;
-    case 5: // ==
-        MainWindow::on_comboBox_OP1_currentIndexChanged( ui->comboBox_OP1->currentIndex());
-        MainWindow::on_comboBox_OP2_currentIndexChanged( ui->comboBox_OP2->currentIndex());// вызов значений с кнопок
-        break;
-    }
+    my_func();
 }
 
-void MainWindow::on_comboBox_OP1_currentIndexChanged(int index) // Считывание значения с первой кнопки
+void MainWindow::on_comboBox_OP1_currentIndexChanged(int ) // Считывание значения с первой кнопки
 {
-
-    switch (index)
-    {
-    case 0:
-        my_func();
-        break;
-    case 1:
-        my_func();
-        break;
-    }
+    my_func();
 }
 
-void MainWindow::on_comboBox_OP2_currentIndexChanged(int index) // Считывание значения со второй кнопки
+void MainWindow::on_comboBox_OP2_currentIndexChanged(int ) // Считывание значения со второй кнопки
 {
-    switch (index)
-    {
-    case 0:
-        my_func();
-        break;
-    case 1:
-        my_func();
-        break;
-    }
+    my_func();
 }
 
-void MainWindow::my_func() // если 1 кнопка == 0
+void MainWindow::my_func() // считывание значений
 {
-    int LogOp; bool Op1, Op2, res;
-
-    LogOp = ui->comboBox_LogOp->currentIndex();
-    Op1 = ui->comboBox_OP1->currentIndex();
-    Op2 = ui->comboBox_OP2->currentIndex();
-
-    /* 0 -> 1 & 1 == 1, 1 & 0 || 0 & 1 == 0
-       1 -> 1 || 0, 0 || 1, 1 || 1 == 1
-       2 -> !1 == 0, !0 == 1
-       3 -> 0 != 1 == 0,
-       4 -> 1 -> 0 == 0, else 1
-       5 ->1 == 1 & 0 == 0, == 1
-    */
 
     QPalette pal;
     pal=ui->centralWidget->palette(); //считали палитру
+
+    int LogOp; bool res = false; bool Op2, Op1;
+    LogOp = ui->comboBox_LogOp->currentIndex();// приравнивание индекса переменной
+    Op1 =  static_cast<bool>(ui->comboBox_OP1->currentIndex());//приравнивание индекса переменной
+    Op2 =  static_cast<bool>(ui->comboBox_OP2->currentIndex());//приравнивание индекса переменной
+
     switch (LogOp)
     {
-    case 0: // and
+    case 0: //конъюнкция
         ui->comboBox_OP2->setVisible(true);
-        if ((Op1 == 1) && (Op2 == 1))
-            res  = true;
-        else
-            res = false;
+        res = (Op1 & Op2);
         break;
-    case 1:// or
+
+    case 1: //дизъюнкция
         ui->comboBox_OP2->setVisible(true);
-        if ((Op2 == 1) || (Op1 == 1))
-            res = true;
-        else
-            res = false;
+        res = (Op1 || Op2);
         break;
-    case 2:// !
+
+    case 2: //отрицание
         ui->comboBox_OP2->setVisible(false);
-        if (Op1 == 0)
-            res = true;
-        else
-            res = false;
+        res = (!Op1);
         break;
-    case 3:// !=
+
+    case 3: //сложение по модулю (XOR)
         ui->comboBox_OP2->setVisible(true);
-        if ((Op1 != Op2) || (Op2 != Op1))
-            res = true;
-        else
-            res = false;
+        res = !(Op1 == Op2);
         break;
-    case 4:// ->
+
+    case 4: //Штрих Шеффера
         ui->comboBox_OP2->setVisible(true);
-        if((Op1 == 1) && (Op2 == 0))
-            res = false;
-        else
-            res = true;
+        res = !(Op1 && Op2);
         break;
-    case 5:// ==
+
+    case 5: //эквивалентность
         ui->comboBox_OP2->setVisible(true);
-        if ((Op2 == Op1) || (Op1 == Op2))
-            res = true;
-        else
-            res = false;
+        res = (Op1 == Op2);
         break;
+
     }
     if (res)
-    {
-        pal.setColor(QPalette::Window,Qt::green);
-        ui->centralWidget->setAutoFillBackground(true); //разрешаем автозаливку
-        ui->centralWidget->setPalette(pal); //присваиваем измененную палитру
-        ui->label_result->setText("true");
-    }
-    else
-    {
-        pal.setColor(QPalette::Window,Qt::red);
-        ui->centralWidget->setAutoFillBackground(true); //разрешаем автозаливку
-        ui->centralWidget->setPalette(pal); //присваиваем измененную палитру
-        ui->label_result->setText("false");
-    }
+        {
+            pal.setColor(QPalette::Window,Qt::green);
+            ui->centralWidget->setAutoFillBackground(true); //разрешаем автозаливку
+            ui->centralWidget->setPalette(pal); //присваиваем измененную палитру
+            ui->label_result->setText("true");
+        }
+        else
+        {
+            pal.setColor(QPalette::Window,Qt::red);
+            ui->centralWidget->setAutoFillBackground(true); //разрешаем автозаливку
+            ui->centralWidget->setPalette(pal); //присваиваем измененную палитру
+            ui->label_result->setText("false");
+        }
 }

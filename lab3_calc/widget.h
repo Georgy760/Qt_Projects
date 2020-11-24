@@ -2,6 +2,11 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include <math.h>
+#include <cmath>
+#include <QString>
+
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -16,17 +21,18 @@ public:
     ~Widget();
 
 private slots:
-    void on_plus_clicked();
+    void on_mul_clicked();
 
-    void on_minus_clicked();
+    void on_sum_clicked();
 
-    void on_count_clicked();
+    void on_div_clicked();
 
-    void on_mnoz_clicked();
+    void on_sub_clicked();
 
-    void on_dele_clicked();
+    void on_resbutton_clicked();
 
     void on_sqrt_clicked();
+
 
 private:
     Ui::Widget *ui;

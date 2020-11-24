@@ -16,19 +16,10 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_ButtonAddRow_clicked();
-
-    void on_ButtonDelRow_clicked();
 
     void on_spinBox_valueChanged(int arg1);
 
-    void on_ButtonGetSum_clicked();
-
-    void on_ButtonAddColumn_clicked();
-
     void on_ButtonRandom_clicked();
-
-    void on_ButtonDelColumn_clicked();
 
     void on_tableWidget_cellChanged(int row, int column);
 
